@@ -4,7 +4,7 @@ CC			:= clang
 
 CCFLAGS		:= -Wall -Wextra -Werror
 
-HEADER_DIR	:= ./header/
+HEADER_DIR	:= ./header/ ./libraries/libft
 
 INCLUDE		:=	$(foreach directory, $(HEADER_DIR), -I $(directory))
 
@@ -23,7 +23,7 @@ LIBFT_FLAGS	:=	-L $(LIBFT_PATH) -lft
 all: $(NAME)
 
 $(NAME): $(SRC) $(LIBFT)
-	@$(CC) -g $(CCFLAGS) $(SRC) -o $@ $(INCLUDE) $(LIBFT_FLAGS) 
+	@$(CC) -g $(CCFLAGS) $(SRC) -o $@ $(INCLUDE) $(LIBFT_FLAGS)
 	@echo "\033[0;32mCub3d created ヽ(^o^)ノ \033[0m"
 
 $(LIBFT):
