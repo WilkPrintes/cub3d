@@ -2,7 +2,7 @@ NAME		:= cub3d
 
 CC			:= clang
 
-CCFLAGS		:= -Wall -Wextra -Werror
+# CCFLAGS		:= -Wall -Wextra -Werror
 
 HEADER_DIR	:= ./header/ ./libraries/libft
 
@@ -20,10 +20,12 @@ LIBFT_PATH	:=	libraries/libft
 
 LIBFT_FLAGS	:=	-L $(LIBFT_PATH) -lft
 
+MLX_FLAGS	:= -lmlx -Ilmlx -lXext -lX11
+
 all: $(NAME)
 
 $(NAME): $(SRC) $(LIBFT)
-	@$(CC) -g $(CCFLAGS) $(SRC) -o $@ $(INCLUDE) $(LIBFT_FLAGS)
+	@$(CC) -g $(CCFLAGS) $(SRC) -o $@ $(INCLUDE) $(LIBFT_FLAGS) $(MLX_FLAGS)
 	@echo "\033[0;32mCub3d created ヽ(^o^)ノ \033[0m"
 
 $(LIBFT):

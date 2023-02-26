@@ -13,3 +13,16 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "libft.h"
+#include <mlx.h>
+
+#define X 1280
+#define Y 720
+
+typedef struct s_data
+{
+	void	*ptr;
+	void	*win;
+    int     player_x;
+    int     player_y;
+    int     **map;
+}t_data;

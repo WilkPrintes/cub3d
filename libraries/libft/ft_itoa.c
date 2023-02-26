@@ -45,15 +45,12 @@ char	*ft_itoa(int n)
 
 static int	decimal_places(int i)
 {
-	int	total;
 	int	count;
 
 	count = 0;
-	total = 0;
 	while (i > 0)
 	{
 		i = i / 10;
-		total = 10 * 10;
 		count++;
 	}
 	return (count);

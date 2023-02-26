@@ -57,17 +57,14 @@ static int	potentiation(int i)
 
 static int	decimal_places(long i)
 {
-	int	total;
 	int	count;
 
 	if (i == 0)
 		return (1);
 	count = 0;
-	total = 0;
 	while (i > 0)
 	{
 		i = i / 10;
-		total = 10 * 10;
 		count++;
 	}
 	return (count);
