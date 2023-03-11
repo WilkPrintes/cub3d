@@ -10,19 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
-#include "libft.h"
-#include <mlx.h>
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#define X 1280
-#define Y 720
+# include <stdio.h>
+# include <fcntl.h>
+# include "libft.h"
+# include <mlx.h>
+
+# define X 1280
+# define Y 720
 
 typedef struct s_data
 {
 	void	*ptr;
 	void	*win;
-    int     player_x;
-    int     player_y;
-    int     **map;
-}t_data;
+	int		player_x;
+	int		player_y;
+	int		**map;
+}	t_data;
+
+#endif
