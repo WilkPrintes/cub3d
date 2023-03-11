@@ -1,53 +1,126 @@
-NAME		:= cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
+#    Updated: 2023/03/11 15:49:03 by bmugnol-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC			:= clang
 
-# CCFLAGS		:= -Wall -Wextra -Werror
+# GENERAL OPTIONS
+# C Compiler
+CC		:=	clang
+# Compiler flags
+CFLAGS	:=	-Wall -Wextra -Werror
+# Removal tool
+RM		:=	rm -rf
 
-HEADER_DIR	:= ./header/ ./libraries/libft
 
-INCLUDE		:=	$(foreach directory, $(HEADER_DIR), -I $(directory))
+# PROGRAM
+# Program name
+NAME		:=	cub3D
 
-SRC_DIR		:= ./src/
+# Master header (includes all headers)
+H_MASTER	:=	master.h
+# Headers
+HEADER_DIR	:=	header
+HEADER		:=	cub3d.h
+H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
-SRC_FILE	:=	cub3d.c
+# Source
+SRC_DIR		:=	src
+SRC			:=	cub3d.c
 
-SRC			:=	$(foreach file, $(SRC_FILE), $(SRC_DIR)$(file))
+# Object
+OBJ_DIR		:=	obj
+OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
-LIBFT		:=	libraries/libft/libft.a
+# Precompiled master header
+C_HEADER	:=	$(H_MASTER:%.h=$(OBJ_DIR)/%.h.gch)
+C_INCLUDE	:=	$(addprefix -include-pch , $(C_HEADER))
 
-LIBFT_PATH	:=	libraries/libft
+# LIBFT
+LIBFT_DIR	:=	./libraries/libft
+LIBFT_H_INC	:=	-I$(LIBFT_DIR)
+LIBFT		:=	$(LIBFT_DIR)/libft.a
 
-LIBFT_FLAGS	:=	-L $(LIBFT_PATH) -lft
+# <mlx.h> library
+MLX_LIB_INC	:=	-lmlx -lXext -lX11
 
-MLX_FLAGS	:= -lmlx -Ilmlx -lXext -lX11
+# <math.h> library
+MATH_LIB_INC:=	-lm
 
+# Inclusions:
+INCLUDE		:=	$(C_INCLUDE) $(H_INCLUDE) $(LIBFT_H_INC)
+LIB_INCLUDE	:=	$(MLX_LIB_INC) $(MATH_LIB_INC)
+
+# Development flag: set dev=1 to automatically find .c's and .h's
+ifeq ($(dev), 1)
+CFLAGS		+=	-g
+SRC			:= 	$(shell find src -name '*.c' -type f)
+SRC_DIR		:=	$(dir $(SRC))
+SRC			:=	$(notdir $(SRC))
+OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
+HEADER		:=	$(shell find . -name '*.h' -type f)
+H_INCLUDE	:=	$(sort $(addprefix -I, $(dir $(HEADER))))
+INCLUDE		:=	$(C_INCLUDE) $(H_INCLUDE) $(LIBFT_H_INC)
+endif
+
+# vpath
+vpath	%.h		$(HEADER_DIR)
+vpath	%.c		$(SRC_DIR)
+
+
+# -----------------------RULES------------------------------------------------ #
+.PHONY: all vg leaks norm norma clean fclean re
+
+# Creates NAME
 all: $(NAME)
 
-$(NAME): $(SRC) $(LIBFT)
-	@$(CC) -g $(CCFLAGS) $(SRC) -o $@ $(INCLUDE) $(LIBFT_FLAGS) $(MLX_FLAGS)
+# Compiles OBJ and LIBFT into the program NAME
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT) $(INCLUDE) $(LIB_INCLUDE)
 	@echo "\033[0;32mCub3d created ヽ(^o^)ノ \033[0m"
 
-$(LIBFT):
-	@make -s -C $(LIBFT_PATH)
+# Compiles SRC into OBJ
+$(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
-fclean: clean
-	@make fclean -s -C $(LIBFT_PATH)
-	@rm -rf $(NAME)
-	@echo "\033[0;31mCub3d deleted (⌣́ _⌣̀ ) \033[0m"
+# Header precompiling
+$(C_HEADER): $(OBJ_DIR)/%.h.gch: %.h $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
 
-clean:
-	@make clean -s -C $(LIBFT_PATH)
-
-re: fclean all
-
+# Directory making
 $(OBJ_DIR):
 	@mkdir -p $@
 
-norma:
-	@norminette ./
+# Libft compiling
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
-leaks:
-	@valgrind -q --tool=helgrind ./philo 2 200 100 100
+# Run program using valgrind
+vg leaks:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 
-.PHONY: all fclean re
+# Norm: checks code for norm errors
+norm norma:
+	@norminette | grep "Error" | cat
+	@$(MAKE) -C $(LIBFT_DIR) norm
+
+# Clean: removes objects' directory
+clean:
+	@$(RM) $(OBJ_DIR)
+#	$(MAKE) -C $(LIBFT_DIR) clean
+
+# Full clean: removes objects' directory and generated programs
+fclean: clean
+	@$(RM) $(NAME)
+	@echo "\033[0;31mCub3d deleted (⌣́ _⌣̀ ) \033[0m"
+#	$(MAKE) -C $(LIBFT_DIR) fclean
+
+# Remake: full cleans and runs 'all' rule
+re: fclean all
