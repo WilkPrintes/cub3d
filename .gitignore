@@ -13,6 +13,9 @@
 !src/*/
 !src/*/*.c
 !src/*/*.h
+!src/*/*/
+!src/*/*/*.c
+!src/*/*/*.h
 
 # Makefile
 !Makefile
