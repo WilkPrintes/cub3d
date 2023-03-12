@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 void create_square(t_data *data, int increment_x, int increment_y);
 void render_map(int **map, t_data data);
 void square(t_data data, int x, int y, int color);
@@ -165,3 +165,4 @@ void create_square(t_data *data, int increment_x, int increment_y)
 	data->player_x = x_aux + increment_x;
 	data->player_y = y_aux + increment_y;
 }
+*/
