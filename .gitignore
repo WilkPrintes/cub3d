@@ -1,0 +1,32 @@
+###	Ignore all
+*
+
+###	Except these specific files:
+# Headers
+!header
+!header/*.h
+
+# Source
+!src
+!src/*.c
+!src/*.h
+!src/*/
+!src/*/*.c
+!src/*/*.h
+!src/*/*/
+!src/*/*/*.c
+!src/*/*/*.h
+
+# Makefile
+!Makefile
+
+# Libraries
+!libraries
+!libft
+
+# Maps
+!maps
+!maps/*.cub
+
+# gitignore
+!.gitignore
