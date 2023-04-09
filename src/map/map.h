@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verifier.h                                         :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 18:05:44 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/07 14:42:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/03/15 21:50:07 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/04/07 16:11:52 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VERIFIER_H
-# define VERIFIER_H
+#ifndef MAP_H
+# define MAP_H
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include "macro.h"
 # include "define.h"
+# include "libft.h"
+# include "map_texture.h"
 
-int	fd_verifier(int fd);
-int	file_access_verifier(char *filename);
-int	data_verifier(t_mlx_data *data);
-int	param_verifier(const int argc, const char *map_file);
+void	fn(void);
 
 #endif

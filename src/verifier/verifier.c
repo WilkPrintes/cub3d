@@ -6,13 +6,27 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 22:33:41 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/11 19:07:31 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:22:01 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "verifier.h"
 
 static int	is_valid_file_extension(const char *file, const char *ext);
+
+int	file_access_verifier(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(filename);
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
 
 int	fd_verifier(int fd)
 {

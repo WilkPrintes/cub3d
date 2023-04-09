@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verifier.h                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 18:05:44 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/07 14:42:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/04/07 15:47:51 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/04/07 15:48:17 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VERIFIER_H
-# define VERIFIER_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include "define.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*cast_s1;
+	unsigned char	*cast_s2;
 
-int	fd_verifier(int fd);
-int	file_access_verifier(char *filename);
-int	data_verifier(t_mlx_data *data);
-int	param_verifier(const int argc, const char *map_file);
-
-#endif
+	cast_s1 = (unsigned char *)(s1);
+	cast_s2 = (unsigned char *)(s2);
+	i = 0;
+	while (*(cast_s1 + i) == *(cast_s2 + i) && *(cast_s1 + i))
+		i++;
+	return (*(cast_s1 + i) - *(cast_s2 + i));
+}

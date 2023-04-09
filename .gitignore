@@ -28,5 +28,9 @@
 !maps
 !maps/*.cub
 
+# Assets
+!assets
+!assets/*.xpm
+
 # gitignore
 !.gitignore

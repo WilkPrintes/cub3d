@@ -6,7 +6,7 @@
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 17:20:49 by bmugnol-          #+#    #+#              #
-#    Updated: 2023/03/01 13:55:57 by bmugnol-         ###   ########.fr        #
+#    Updated: 2023/04/07 15:55:52 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,11 +54,11 @@ SRC	+=	ft_atoi.c		ft_atoll.c		ft_calloc.c
 SRC	+=	ft_bzero.c
 ###	<string.h>
 SRC	+=	ft_memchr.c		ft_memcmp.c		ft_memcpy.c		ft_memmove.c\
-		ft_memset.c 	# Memory
+		ft_memset.c 					# Memory
 SRC	+=	ft_strlen.c		ft_strdup.c		ft_strchr.c		ft_strrchr.c\
-		ft_strncmp.c	# Strings
+		ft_strcmp.c	ft_strncmp.c	# Strings
 SRC	+=	ft_strlcpy.c	ft_strlcat.c								\
-		ft_strnstr.c	# <bsd/string.h>
+		ft_strnstr.c					# <bsd/string.h>
 ###	Libft specific
 SRC	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	ft_split.c	\
 		ft_strmapi.c	ft_striteri.c

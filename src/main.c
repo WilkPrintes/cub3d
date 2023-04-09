@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:18:04 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/11 20:38:18 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:49:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx_data.h"
 #include "mlx_hook.h"
 #include "render.h"
+#include "map.h"
 
 static int	mlx_runner(void);
 
@@ -21,6 +22,7 @@ int	main(int argc, char **argv)
 {
 	if (param_verifier(argc, argv[1]))
 		return (1);
+	fn();
 	return (mlx_runner());
 }
 
