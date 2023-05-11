@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verifier.h                                         :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 18:05:44 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/04 14:49:51 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/04/14 15:49:15 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/05/03 16:26:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VERIFIER_H
-# define VERIFIER_H
+#include "map_setup.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include "define.h"
-# include "libft.h"
-# include "error.h"
+int	count_columns(char **matrix)
+{
+	int	counter;
 
-int	fd_verifier(int fd);
-int	file_access_verifier(char *filename);
-int	data_verifier(t_mlx_data *data);
-int	param_verifier(const int argc, const char *map_file);
+	if (!matrix)
+		return (0);
+	counter = 0;
+	while (matrix[counter])
+		counter++;
+	return (counter);
+}
 
-#endif
+int	is_digit_str(const char *str)
+{
+	if (!str || !*str)
+		return (0);
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9'))
+			return (0);
+		str++;
+	}
+	return (1);
+}

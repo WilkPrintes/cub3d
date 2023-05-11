@@ -6,12 +6,14 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/11 19:42:53 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/04/27 18:55:57 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
+
+# include <stdlib.h>
 
 typedef struct s_pixel
 {
@@ -19,6 +21,13 @@ typedef struct s_pixel
 	int	y;
 	int	color;
 }	t_pixel;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle;
+}	t_player;
 
 typedef struct s_texture_path
 {
@@ -34,6 +43,14 @@ typedef struct s_graphic_config
 	int				floor_rgb;
 	int				ceiling_rgb;
 }	t_graphic_config;
+
+typedef struct s_map
+{
+	int			**matrix;
+	int			lines;
+	int			columns;
+	t_player	player;
+}	t_map;
 
 typedef struct s_image {
 	void	*mlx_img;

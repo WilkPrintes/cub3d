@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_texture.h                                      :+:      :+:    :+:   */
+/*   map_setup.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:43:55 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/08 22:55:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:05:11 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_TEXTURE_H
-# define MAP_TEXTURE_H
+#ifndef MAP_SETUP_H
+# define MAP_SETUP_H
 
 # include <stdlib.h>
-# include <fcntl.h>
 # include "macro.h"
 # include "define.h"
 # include "libft.h"
+# include "error.h"
+# include "verifier.h"
 
+// map_color.c
+int	get_colors(char **words, t_graphic_config *config);
+int	get_colors2(char *line, char **words, t_graphic_config *config);
+
+// map_matrix.c
+int	get_int_map(char **str_matrix, t_map *map);
+
+// map_read.c
+int	read_map(int map_fd, t_map *map);
+
+// map_texture.c
 int	get_textures(char **words, t_texture_path *textures);
+
+// map_verifier.c
+int	is_closed_map(t_map map);
+
+// map_utils.c
+int	count_columns(char **matrix);
+int	is_digit_str(const char *str);
 
 #endif

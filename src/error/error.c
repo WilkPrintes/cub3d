@@ -6,11 +6,17 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:51:33 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/11 18:49:01 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:57:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
+
+int	map_error(int exit_code, const char *locale, const char *description)
+{
+	ft_putstr_fd("Error\n", 2);
+	return (generic_error(exit_code, locale, description, NULL));
+}
 
 int	generic_error(int exit_code, const char *locale,
 	const char *description, char *usage)

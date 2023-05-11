@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:50:07 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/07 16:11:52 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:09:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # include "macro.h"
 # include "define.h"
 # include "libft.h"
-# include "map_texture.h"
+# include "error.h"
+# include "map_setup.h"
 
-void	fn(void);
+int	fn(char *file, t_map *map, t_graphic_config *config);
 
 #endif
