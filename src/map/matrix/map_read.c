@@ -6,18 +6,18 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:10:50 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/10 17:08:53 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:47:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_setup.h"
 
-static char *get_str_map(int map_fd, t_map *map);
+static char	*get_str_map(int map_fd, t_map *map);
 
-int read_map(int map_fd, t_map *map)
+int	read_map(int map_fd, t_map *map)
 {
-	char *str_map;
-	char **str_matrix;
+	char	*str_map;
+	char	**str_matrix;
 
 	str_map = get_str_map(map_fd, map);
 	close(map_fd);
@@ -40,10 +40,10 @@ int read_map(int map_fd, t_map *map)
 	return (1);
 }
 
-static char *get_str_map(int map_fd, t_map *map)
+static char	*get_str_map(int map_fd, t_map *map)
 {
-	char *line;
-	char *str_map;
+	char	*line;
+	char	*str_map;
 
 	line = get_next_line(map_fd);
 	while (line && *line == '\n')
@@ -56,7 +56,7 @@ static char *get_str_map(int map_fd, t_map *map)
 	{
 		line = get_next_line(map_fd);
 		if (!line)
-			break;
+			break ;
 		if (*line != '\n')
 			map->lines++;
 		if ((size_t)map->columns < ft_strlen(line) - 1)

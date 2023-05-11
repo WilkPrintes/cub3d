@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/11 16:08:53 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:47:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	get_textures(char **words, t_texture_path *textures)
 
 static int	populate_path(char *new_path, char **texture_path)
 {
-
 	if (!texture_path || !new_path)
 		return (0);
 	if (*texture_path)

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:24:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/10 17:08:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:49:10 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_closed_map(t_map map)
 {
 	int	x;
 	int	y;
-	int is_closed;
+	int	is_closed;
 
 	y = 0;
 	is_closed = 1;
@@ -29,7 +29,7 @@ int	is_closed_map(t_map map)
 		while (x < map.columns)
 		{
 			if (map.matrix[y][x] == 0)
-				is_closed = is_closed && is_correctly_surrounded(x, y, map);
+				is_closed = is_closed & is_correctly_surrounded(x, y, map);
 			x++;
 		}
 		y++;

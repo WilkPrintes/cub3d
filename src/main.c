@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:18:04 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/04 15:07:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:49:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	if (param_verifier(argc, argv[1]))
 		return (1);
-	if (fn(argv[1], &map, &config))
+	if (!get_map(argv[1], &map, &config))
 		return (EXIT_FAILURE);
 	return (mlx_runner(config.floor_rgb, config.ceiling_rgb));
 }
