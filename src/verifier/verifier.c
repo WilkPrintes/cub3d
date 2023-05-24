@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 22:33:41 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/15 23:22:01 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:51:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,17 @@ int	file_access_verifier(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
+		ft_putstr_fd("Error\n", 2);
 		perror(filename);
 		return (1);
 	}
 	close(fd);
-	return (0);
+	fd = open(filename, O_RDONLY | O_DIRECTORY);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	map_error(1, filename, "File provided is a directory");
+	return (1);
 }
 
 int	fd_verifier(int fd)

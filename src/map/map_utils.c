@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_texture.h                                      :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 15:43:55 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/08 22:55:35 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/04/14 15:49:15 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/05/03 16:26:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_TEXTURE_H
-# define MAP_TEXTURE_H
+#include "map_setup.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include "macro.h"
-# include "define.h"
-# include "libft.h"
+int	count_columns(char **matrix)
+{
+	int	counter;
 
-int	get_textures(char **words, t_texture_path *textures);
+	if (!matrix)
+		return (0);
+	counter = 0;
+	while (matrix[counter])
+		counter++;
+	return (counter);
+}
 
-#endif
+int	is_digit_str(const char *str)
+{
+	if (!str || !*str)
+		return (0);
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9'))
+			return (0);
+		str++;
+	}
+	return (1);
+}

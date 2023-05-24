@@ -6,7 +6,7 @@
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
-#    Updated: 2023/03/11 15:49:03 by bmugnol-         ###   ########.fr        #
+#    Updated: 2023/05/04 16:06:38 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(LIBFT):
 
 # Run program using valgrind
 vg leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
+	$(MAKE) dev=1 && valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/validMap.cub
 
 # Norm: checks code for norm errors
 norm norma:
@@ -114,13 +114,13 @@ norm norma:
 # Clean: removes objects' directory
 clean:
 	@$(RM) $(OBJ_DIR)
-#	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 # Full clean: removes objects' directory and generated programs
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "\033[0;31mCub3d deleted (⌣́ _⌣̀ ) \033[0m"
-#	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # Remake: full cleans and runs 'all' rule
 re: fclean all

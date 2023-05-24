@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:18:04 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/07 14:49:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:49:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@
 #include "render.h"
 #include "map.h"
 
-static int	mlx_runner(void);
+static int	mlx_runner(int floor_color, int ceiling_color);
 
 int	main(int argc, char **argv)
 {
+	t_graphic_config	config;
+	t_map				map;
+
 	if (param_verifier(argc, argv[1]))
 		return (1);
-	fn();
-	return (mlx_runner());
+	if (!get_map(argv[1], &map, &config))
+		return (EXIT_FAILURE);
+	return (mlx_runner(config.floor_rgb, config.ceiling_rgb));
 }
 
-static int	mlx_runner(void)
+static int	mlx_runner(int floor_color, int ceiling_color)
 {
 	t_mlx_data	data;
 
@@ -36,11 +40,11 @@ static int	mlx_runner(void)
 	paint_rectangle(&data.image,
 		(t_pixel){.x = WINDOW_WIDTH, .y = 0},
 		(t_pixel){.x = 0, .y = WINDOW_HEIGHT / 2},
-		0xFF);
+		ceiling_color);
 	paint_rectangle(&data.image,
 		(t_pixel){.x = 0, .y = WINDOW_HEIGHT},
 		(t_pixel){.x = WINDOW_WIDTH, .y = WINDOW_HEIGHT / 2},
-		0x22);
+		floor_color);
 	mlx_put_image_to_window(data.mlx, data.win, data.image.mlx_img, 0, 0);
 	mlx_hook(data.win, X_KEY_PRESS_EVENT, X_KEY_PRESS_MASK,
 		&key_press_hook, &data);
