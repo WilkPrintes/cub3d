@@ -8,14 +8,7 @@
 #include "mlx_hook.h"
 #include "render.h"
 #include "map.h"
-#define PI 3.14159265359
-// #define WINDOW_WIDTH 640
-// #define WINDOW_HEIGHT 400
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
-#define KEY_W 119
-#define KEY_ESC 65307
+
 
 void    plot_pixel(t_core *core, t_vec2 pos, int color);
 void    print_sky_and_floor(t_core *core);
