@@ -1,8 +1,8 @@
-NO assets/0.xpm
-SO assets/1.xpm
+NO assets/north_texture.xpm
+SO assets/south_texture.xpm
+EA assets/east_texture.xpm
+WE assets/west_texture.xpm
 
-EA assets/0.xpm
-WE assets/0.xpm
 C 255,200,160
 F 122,122,122
 

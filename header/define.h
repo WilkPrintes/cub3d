@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/04/27 18:55:57 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 03:00:50 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,39 @@ typedef struct s_pixel
 	int	color;
 }	t_pixel;
 
+typedef struct s_vec2
+{
+	int x;
+	int y;
+}   t_vec2;
+
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	angle;
-}	t_player;
+	t_vec2 pos;
+	double dir;
+}   t_player;
+
+typedef struct s_core
+{
+	void    *mlx;
+	void    *win;
+	void    *img;
+	char    *addr;
+	int     bits_per_pixel;
+	int     line_length;
+	int     endian;
+	int     width;
+	int     height;
+	t_player player;
+}   t_core;
+
+typedef struct s_xpm
+{
+	void	*img;
+	char	*relative_path;
+	int		width;
+	int		height;
+}   t_xpm;
 
 typedef struct s_texture_path
 {

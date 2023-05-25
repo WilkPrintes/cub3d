@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:10:50 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/11 16:47:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 03:00:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	read_map(int map_fd, t_map *map)
 		return (map_error(0, NULL, "Invalid character"));
 	}
 	ft_free_char_matrix(&str_matrix);
-	if (map->player.x == 0 || map->player.y == 0)
+	if (map->player.pos.x == 0 || map->player.pos.y == 0)
 		return (map_error(0, NULL, "Invalid map: no initial player position"));
 	if (!is_closed_map(*map))
 		return (map_error(0, NULL, "Invalid map: map isn't closed"));

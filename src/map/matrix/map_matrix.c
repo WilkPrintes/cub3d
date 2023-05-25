@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:01:22 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/10 17:17:11 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/24 23:30:18 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	get_player(int x, int y, char c, t_player *player)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		if (player->x || player->y)
+		if (player->pos.x || player->pos.y)
 			return (-1);
-		player->x = x;
-		player->y = y;
+		player->pos.x = x;
+		player->pos.y = y;
 		return (1);
 	}
 	return (0);
