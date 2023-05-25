@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/25 03:00:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:28:02 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ typedef struct s_player
 	t_vec2 pos;
 	double dir;
 }   t_player;
-
-typedef struct s_core
-{
-	void    *mlx;
-	void    *win;
-	void    *img;
-	char    *addr;
-	int     bits_per_pixel;
-	int     line_length;
-	int     endian;
-	int     width;
-	int     height;
-	t_player player;
-}   t_core;
 
 typedef struct s_xpm
 {
@@ -94,5 +80,21 @@ typedef struct s_mlx_data {
 	t_image	image;
 	int		is_valid;
 }	t_mlx_data;
+
+typedef struct s_core
+{
+	// void				*mlx;
+	// void				*win;
+	// void				*img;
+	// char				*addr;
+	t_mlx_data			graphic;
+	// int					bits_per_pixel;
+	// int					line_length;
+	// int					endian;
+	// int					width;
+	// int					height;
+	t_player 			player;
+	t_graphic_config	config;
+}   t_core;
 
 #endif

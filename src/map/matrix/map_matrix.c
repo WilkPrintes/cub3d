@@ -6,11 +6,12 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:01:22 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/24 23:30:18 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:53:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_setup.h"
+#include "raycasting.h"
 
 static int	get_player(int x, int y, char c, t_player *player);
 static int	is_valid_map_char(int *value, char c);
@@ -47,8 +48,8 @@ static int	get_player(int x, int y, char c, t_player *player)
 	{
 		if (player->pos.x || player->pos.y)
 			return (-1);
-		player->pos.x = x;
-		player->pos.y = y;
+		player->pos.x = x * 64 + 32;
+		player->pos.y = y * 64;
 		return (1);
 	}
 	return (0);

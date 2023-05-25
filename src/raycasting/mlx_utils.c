@@ -21,14 +21,14 @@ void	plot_pixel(t_core *core, t_vec2 pos, int color)
 {
 	char    *pixel;
 
-	pixel = core->addr + (pos.y * core->line_length + pos.x * (core->bits_per_pixel / 8));
+	pixel = core->graphic.image.addr + (pos.y * core->graphic.image.line_size + pos.x * (core->graphic.image.bpp / 8));
 	*(unsigned int *)pixel = color;
 }
 
 void	print_sky_and_floor(t_core *core)
 {
-	create_rectangle(core, (t_vec2){0, 0}, (t_vec2){WIDTH, HEIGHT / 2}, 0x0000FF);
-	create_rectangle(core, (t_vec2){0, HEIGHT / 2}, (t_vec2){WIDTH, HEIGHT / 2}, 0x808080);
+	create_rectangle(core, (t_vec2){0, 0}, (t_vec2){WINDOW_WIDTH, WINDOW_HEIGHT / 2}, 0x0000FF);
+	create_rectangle(core, (t_vec2){0, WINDOW_HEIGHT / 2}, (t_vec2){WINDOW_WIDTH, WINDOW_HEIGHT / 2}, 0x808080);
 }
 
 // t_vec2	show_minimap(t_core *core, int map[10][10])
@@ -178,9 +178,9 @@ double	wall_projection(double dist_wall)
 
 	if (dist_wall == 0 || dist_wall == 999999)
 		return (0);
-	wall_height = 64 / dist_wall * HEIGHT;
-	if (wall_height > HEIGHT)
-		return (HEIGHT);
+	wall_height = 64 / dist_wall * WINDOW_HEIGHT;
+	if (wall_height > WINDOW_HEIGHT)
+		return (WINDOW_HEIGHT);
 	return (wall_height);
 }
 
@@ -190,10 +190,10 @@ void	create_wall(t_core *core, t_vec2 pos, double wall_height, int color)
 	int		start;
 	int 	end;
 
-	start = (HEIGHT - wall_height) / 2;
-	end = (HEIGHT + wall_height) / 2;
+	start = (WINDOW_HEIGHT - wall_height) / 2;
+	end = (WINDOW_HEIGHT + wall_height) / 2;
 	i.y = 0;
-	while (i.y < HEIGHT)
+	while (i.y < WINDOW_HEIGHT)
 	{
 		if (i.y < start)
 			plot_pixel(core, (t_vec2){pos.x, i.y}, 0x0000FF);

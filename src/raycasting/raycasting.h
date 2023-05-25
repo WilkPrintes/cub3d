@@ -9,8 +9,8 @@
 #include "render.h"
 #include "map.h"
 #define PI 3.14159265359
-#define WIDTH 640
-#define HEIGHT 400
+// #define WINDOW_WIDTH 640
+// #define WINDOW_HEIGHT 400
 #define KEY_A 97
 #define KEY_S 115
 #define KEY_D 100
@@ -35,4 +35,4 @@ int     is_wall(double ay, double ax, int **map);
 double  wall_projection(double dist_wall);
 void    create_wall(t_core *core, t_vec2 pos, double wall_height, int color);
 // void    raycasting(t_core *core, t_player player, int map[10][10]);
-void    raycasting(t_core *core, t_player player, int **map);
+void    raycasting(t_core *core, t_player player, t_map map);

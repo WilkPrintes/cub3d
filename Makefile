@@ -6,7 +6,7 @@
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
-#    Updated: 2023/05/04 16:06:38 by bmugnol-         ###   ########.fr        #
+#    Updated: 2023/05/25 15:44:21 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(LIBFT):
 
 # Run program using valgrind
 vg leaks:
-	$(MAKE) dev=1 && valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/validMap.cub
+	$(MAKE) dev=1 && valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/wilkMap.cub
 
 # Norm: checks code for norm errors
 norm norma:
