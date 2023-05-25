@@ -6,12 +6,15 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:38:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/15 23:09:52 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:09:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACRO_H
 # define MACRO_H
+
+// Pi
+# define PI 3.14159265359
 
 // Screen size
 # define WINDOW_WIDTH	1080

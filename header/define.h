@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/25 16:28:02 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:08:49 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,9 @@ typedef struct s_mlx_data {
 
 typedef struct s_core
 {
-	// void				*mlx;
-	// void				*win;
-	// void				*img;
-	// char				*addr;
-	t_mlx_data			graphic;
-	// int					bits_per_pixel;
-	// int					line_length;
-	// int					endian;
-	// int					width;
-	// int					height;
-	t_player 			player;
+	t_map				map;
 	t_graphic_config	config;
+	t_mlx_data			graphic;
 }   t_core;
 
 #endif

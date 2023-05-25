@@ -31,7 +31,6 @@ void	print_sky_and_floor(t_core *core)
 	create_rectangle(core, (t_vec2){0, WINDOW_HEIGHT / 2}, (t_vec2){WINDOW_WIDTH, WINDOW_HEIGHT / 2}, 0x808080);
 }
 
-// t_vec2	show_minimap(t_core *core, int map[10][10])
 t_vec2	show_minimap(t_core *core, t_map map)
 {
 	t_vec2	i;
@@ -56,25 +55,22 @@ t_vec2	show_minimap(t_core *core, t_map map)
 	return (player_pos);
 }
 
-// int	is_wall(double ay, double ax, int map[10][10])
-int	is_wall(double ay, double ax, int **map)
+int     is_wall(double ay, double ax, t_map map)
 {
-	if (ay / 64 < 0 || ax / 64 < 0 || ay / 64 > 9 || ax / 64 > 9)
+	if (ay / 64 < 0 || ax / 64 < 0 || ay / 64 > map.lines || ax / 64 > map.columns)
 		return (-1);
-	if (map[(int)ay / 64][(int)ax / 64] == 1)
+	if (map.matrix[(int)ay / 64][(int)ax / 64] == 1)
 		return (1);
 	return (0);
 }
 
-// t_vec2	dist_horizontal(int map[10][10], t_player player, double angle, t_core *core)
-t_vec2	dist_horizontal(int **map, t_player player, double angle, t_core *core)
+t_vec2	dist_horizontal(t_player player, double angle, t_core *core)
 {
 	double	ay;
 	double	ax;
 	double	ya;
 	double	xa;
 
-	(void)core;/////
 	if (sin(angle) == 0)
 		return (vec2(999999, 999999));
 	if (sin(angle) > 0)
@@ -83,7 +79,7 @@ t_vec2	dist_horizontal(int **map, t_player player, double angle, t_core *core)
 		ax = player.pos.x + (player.pos.y - ay) / tan(angle);
 		ya = -64;
 		xa =  64 / tan(angle);
-		while (is_wall(ay, ax, map) == 0)
+		while (is_wall(ay, ax, core->map) == 0)
 		{
 			ay += ya;
 			ax += xa;
@@ -97,7 +93,7 @@ t_vec2	dist_horizontal(int **map, t_player player, double angle, t_core *core)
 		ax = player.pos.x + (player.pos.y - ay) / tan(angle);
 		ya = 64;
 		xa = -64 / tan(angle);
-		while (is_wall(ay, ax, map) == 0)
+		while (is_wall(ay, ax, core->map) == 0)
 		{
 			ay += ya;
 			ax += xa;
@@ -106,16 +102,13 @@ t_vec2	dist_horizontal(int **map, t_player player, double angle, t_core *core)
 	}
 }
 
-
-// t_vec2	dist_vert(int map[10][10], t_player player, double angle, t_core *core)
-t_vec2	dist_vert(int **map, t_player player, double angle, t_core *core)
+t_vec2	dist_vert(t_player player, double angle, t_core *core)
 {
 	double	bx;
 	double	by;
 	double	xa;
 	double	ya;
 
-	(void)core;//////
 	if (cos(angle) == 0)
 		return (vec2(999999, 999999));
 	if (cos(angle) > 0)
@@ -124,7 +117,7 @@ t_vec2	dist_vert(int **map, t_player player, double angle, t_core *core)
 		by =  player.pos.y + (player.pos.x - bx) * tan(angle);
 		ya =  -64 * tan(angle);
 		xa = 64;
-		while (is_wall(by, bx, map) == 0)
+		while (is_wall(by, bx, core->map) == 0)
 		{
 			by += ya;
 			bx += xa;
@@ -137,7 +130,7 @@ t_vec2	dist_vert(int **map, t_player player, double angle, t_core *core)
 		by =  player.pos.y + (player.pos.x - bx) * tan(angle);
 		ya = 64 * tan(angle);
 		xa = -64;
-		while (is_wall(by, bx, map) == 0)
+		while (is_wall(by, bx, core->map) == 0)
 		{
 			by += ya;
 			bx += xa;
