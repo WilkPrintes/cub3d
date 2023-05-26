@@ -53,62 +53,69 @@ int	get_key(int key, t_core *core)
 	return (0);
 }
 
+void load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
+{
+	int i;
+
+	i = 0;
+	ray->n_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.north_wall, &i, &i);
+	ray->n_texture.addr = mlx_get_data_addr(ray->n_texture.mlx_img, &ray->n_texture.bpp, &ray->n_texture.line_size, &ray->n_texture.endian);	
+	ray->s_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.south_wall, &i, &i);
+	ray->s_texture.addr = mlx_get_data_addr(ray->s_texture.mlx_img, &ray->s_texture.bpp, &ray->s_texture.line_size, &ray->s_texture.endian);
+	ray->w_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.west_wall, &i, &i);
+	ray->w_texture.addr = mlx_get_data_addr(ray->w_texture.mlx_img, &ray->w_texture.bpp, &ray->w_texture.line_size, &ray->w_texture.endian);
+	ray->e_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.east_wall, &i, &i);
+	ray->e_texture.addr = mlx_get_data_addr(ray->e_texture.mlx_img, &ray->e_texture.bpp, &ray->e_texture.line_size, &ray->e_texture.endian);
+}
+
 int main (int argc, char **argv)
 {
-	int			i;
 	t_core		core;
-
 	if (param_verifier(argc, argv[1]))
 		return (1);
 	if (!get_map(argv[1], &core.map, &core.config))
 		return (EXIT_FAILURE);
-	i = 0;
 	core.graphic = mount_mlx("prototype");
 	core.map.player.dir = 60 * (PI / 180);
+	load_textures(&core.config, &core.ray, &core);
 	raycasting(&core, core.map.player);
 	mlx_hook(core.graphic.win, X_DESTROY_NOTIFY_EVENT, X_DESTROY_NOTIFY_MASK,
 		&mouse_hook, &core.graphic);
 	mlx_hook(core.graphic.win, 2, 1L<<0,  &get_key, &core);
 	mlx_loop(core.graphic.mlx);
-
 	free_texture_paths(&core.config.textures);
 	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
 	return (dismount_mlx(&core.graphic));
 }
 
 void raycasting(t_core *core, t_player player){
-	t_vec2	dist_h;
-	t_vec2	dist_v;
-	double	distH;
-	double	distV;
-	double	dist;
-	float	angle;
 	int		i;
-
-	angle = PI / 6 + player.dir;
+	
+	core->ray.angle = PI / 6 + player.dir;
 	i = 0;
 	while( i < WINDOW_WIDTH)
 	{
-		dist_h = dist_horizontal(player, angle, core);
-		dist_v = dist_vert(player, angle, core);
-		distH = cos(player.dir - angle) * sqrt(pow(dist_h.x - player.pos.x, 2) + pow(dist_h.y - player.pos.y, 2));
-		distV = cos(player.dir - angle) * sqrt(pow(dist_v.x - player.pos.x, 2) + pow(dist_v.y - player.pos.y, 2));
-		if (distH < distV)
+		core->ray.dist_h = dist_horizontal(player, core->ray.angle, core);
+		core->ray.dist_v = dist_vert(player, core->ray.angle, core);
+		core->ray.distH = cos(player.dir - core->ray.angle) * sqrt(pow(core->ray.dist_h.x - player.pos.x, 2) + pow(core->ray.dist_h.y - player.pos.y, 2));
+		core->ray.distV = cos(player.dir - core->ray.angle) * sqrt(pow(core->ray.dist_v.x - player.pos.x, 2) + pow(core->ray.dist_v.y - player.pos.y, 2));
+		if (core->ray.distH < core->ray.distV)
 		{
-			dist = wall_projection(distH);
-			if ( sin(angle) < 0)
-				create_wall(core, vec2(i, dist), dist, 0xFF6600);
+			core->ray.dist = wall_projection(core->ray.distH);
+			if ( sin(core->ray.angle) < 0)
+				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h' , core->ray.distH, core->ray.angle);
 			else
-				create_wall(core, vec2(i, dist), dist, 0xFF0000);
+				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h', core->ray.distH, core->ray.angle);
 		}
-		else{
-			dist =  wall_projection(distV);
-			if ( cos(angle) < 0)
-				create_wall(core, vec2(i, dist), dist, 0x66FFFF);
+		else
+		{
+			core->ray.dist =  wall_projection(core->ray.distV);
+			if ( cos(core->ray.angle) < 0)
+				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
 			else
-				create_wall(core, vec2(i, dist), dist, 0x00FF00);
+				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
 		}
-		angle -=  (PI/3)/WINDOW_WIDTH;
+		core->ray.angle -=  (PI/3)/WINDOW_WIDTH;
 		i++;
 	}
 	mlx_put_image_to_window(core->graphic.mlx, core->graphic.win, core->graphic.image.mlx_img, 0, 0);

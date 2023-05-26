@@ -21,5 +21,5 @@ t_vec2  dist_vert(t_player player, double angle, t_core *core);
 t_vec2  vec2(int x, int y);
 int     is_wall(double ay, double ax, t_map map);
 double  wall_projection(double dist_wall);
-void    create_wall(t_core *core, t_vec2 pos, double wall_height, int color);
+void    create_wall(t_core *core, t_vec2 pos, double wall_height, int color, double dist_wall, double angle);
 void    raycasting(t_core *core, t_player player);

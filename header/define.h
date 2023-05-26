@@ -70,6 +70,8 @@ typedef struct s_image {
 	char	*addr;
 	int		bpp;
 	int		line_size;
+	int		width;
+	int		height;
 	int		endian;
 }	t_image;
 
@@ -81,11 +83,26 @@ typedef struct s_mlx_data {
 	int		is_valid;
 }	t_mlx_data;
 
+typedef struct s_ray
+{
+	t_vec2	dist_h;
+	t_vec2	dist_v;
+	double	distH;
+	double	distV;
+	double	dist;
+	double	angle;
+	t_image n_texture;
+	t_image s_texture;
+	t_image w_texture;
+	t_image e_texture;
+}	t_ray;
+
 typedef struct s_core
 {
 	t_map				map;
 	t_graphic_config	config;
 	t_mlx_data			graphic;
+	t_ray				ray;
 }   t_core;
 
 #endif
