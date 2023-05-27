@@ -20,39 +20,6 @@
 #include "map.h"
 #include "map_setup.h"
 
-int	get_key(int key, t_core *core)
-{
-	if (key == KEY_ESC)
-	{
-		mlx_loop_end(core->graphic.mlx);
-		return (1);
-	}
-	if (key == KEY_D){
-		printf("d\n");
-		core->map.player.dir -= 0.05;
-		raycasting(core, core->map.player);
-	}
-	if (key == KEY_W){
-		printf("w\n");
-		core->map.player.pos.x += 5 * cos(core->map.player.dir);
-		core->map.player.pos.y -= 5 * sin(core->map.player.dir);
-		raycasting(core, core->map.player);
-	}
-	if (key == KEY_A){
-		core->map.player.dir += 0.05;
-		raycasting(core, core->map.player);
-		printf("a\n");
-	}
-	if (key == KEY_S)
-	{
-		printf("s\n");
-		core->map.player.pos.x -= 5 * cos(core->map.player.dir);
-		core->map.player.pos.y += 5 * sin(core->map.player.dir);
-		raycasting(core, core->map.player);
-	}
-	return (0);
-}
-
 void load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
 {
 	int i;
@@ -94,37 +61,4 @@ int main (int argc, char **argv)
 	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
 	free_texture_images(core);
 	return (dismount_mlx(&core.graphic));
-}
-
-void raycasting(t_core *core, t_player player){
-	int		i;
-
-	core->ray.angle = PI / 6 + player.dir;
-	i = 0;
-	while( i < WINDOW_WIDTH)
-	{
-		core->ray.dist_h = dist_horizontal(player, core->ray.angle, core);
-		core->ray.dist_v = dist_vert(player, core->ray.angle, core);
-		core->ray.distH = cos(player.dir - core->ray.angle) * sqrt(pow(core->ray.dist_h.x - player.pos.x, 2) + pow(core->ray.dist_h.y - player.pos.y, 2));
-		core->ray.distV = cos(player.dir - core->ray.angle) * sqrt(pow(core->ray.dist_v.x - player.pos.x, 2) + pow(core->ray.dist_v.y - player.pos.y, 2));
-		if (core->ray.distH < core->ray.distV)
-		{
-			core->ray.dist = wall_projection(core->ray.distH);
-			if ( sin(core->ray.angle) < 0)
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h' , core->ray.distH, core->ray.angle);
-			else
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h', core->ray.distH, core->ray.angle);
-		}
-		else
-		{
-			core->ray.dist =  wall_projection(core->ray.distV);
-			if ( cos(core->ray.angle) < 0)
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
-			else
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
-		}
-		core->ray.angle -=  (PI/3)/WINDOW_WIDTH;
-		i++;
-	}
-	mlx_put_image_to_window(core->graphic.mlx, core->graphic.win, core->graphic.image.mlx_img, 0, 0);
 }

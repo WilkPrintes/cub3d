@@ -17,48 +17,9 @@
 #include "render.h"
 #include "map.h"
 
-void plot_pixel(t_core *core, t_vec2 pos, int color)
-{
-	char *pixel;
-
-	pixel = core->graphic.image.addr + (pos.y * core->graphic.image.line_size + pos.x * (core->graphic.image.bpp / 8));
-	*(unsigned int *)pixel = color;
-}
-
-void print_sky_and_floor(t_core *core)
-{
-	create_rectangle(core, (t_vec2){0, 0}, (t_vec2){WINDOW_WIDTH, WINDOW_HEIGHT / 2}, 0x0000FF);
-	create_rectangle(core, (t_vec2){0, WINDOW_HEIGHT / 2}, (t_vec2){WINDOW_WIDTH, WINDOW_HEIGHT / 2}, 0x808080);
-}
-
-t_vec2 show_minimap(t_core *core, t_map map)
-{
-	t_vec2 i;
-	t_vec2 player_pos;
-
-	i.y = 0;
-	i.x = 0;
-	while (i.y < map.lines)
-	{
-		i.x = 0;
-		while (i.x < map.columns)
-		{
-			if (map.matrix[i.y][i.x] == 2)
-			{
-				player_pos = vec2(i.x * 64 + 32, i.y * 64);
-				map.matrix[i.y][i.x] = 0;
-			}
-			i.x++;
-		}
-		i.y++;
-	}
-	(void)core; /////
-	return (player_pos);
-}
-
 int is_wall(double ay, double ax, t_map map)
 {
-	if (ay / 64 < 0 || ax / 64 < 0 || ay / 64 > map.lines || ax / 64 > map.columns)
+	if (ay / 64 < 0 || ax / 64 < 0 || ay / 64 >= map.lines || ax / 64 >= map.columns)
 		return (-1);
 	if (map.matrix[(int)ay / 64][(int)ax / 64] == 1)
 		return (1);
@@ -149,23 +110,6 @@ t_vec2 vec2(int x, int y)
 	return (vec);
 }
 
-void create_rectangle(t_core *core, t_vec2 pos, t_vec2 size, int color)
-{
-	t_vec2 i;
-
-	i.y = 0;
-	while (i.y < size.y)
-	{
-		i.x = 0;
-		while (i.x < size.x)
-		{
-			plot_pixel(core, (t_vec2){pos.x + i.x, pos.y + i.y}, color);
-			i.x++;
-		}
-		i.y++;
-	}
-}
-
 double wall_projection(double dist_wall)
 {
 	double wall_height;
@@ -205,7 +149,7 @@ void create_wall(t_core *core, t_vec2 pos, double wall_height, int color, double
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.ceiling_rgb);
 		else
 		{
-			
+
 			if (color == 'h')
 			{
 				if ( sin(core->ray.angle) < 0)
@@ -230,7 +174,7 @@ void create_wall(t_core *core, t_vec2 pos, double wall_height, int color, double
 					text_x = (int)floor(core->map.player.pos.x + dist_wall * sin(angle)) % 64;
 					text_y = ((core->ray.w_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
 					text_x = text_x % core->ray.w_texture.bpp;
-					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.w_texture, text_x, text_y));	
+					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.w_texture, text_x, text_y));
 				}
 				else
 				{
