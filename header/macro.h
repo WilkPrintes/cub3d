@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:38:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/25 17:09:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:37:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define PI 3.14159265359
 
 // Screen size
-# define WINDOW_WIDTH	1080
-# define WINDOW_HEIGHT	720
+# define WINDOW_WIDTH	720
+# define WINDOW_HEIGHT	480
 
 // Map identifiers:
 // Wall textures
