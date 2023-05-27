@@ -130,7 +130,7 @@ int ft_mlx_pixel_get(t_image *img, int x, int y)
 	return (*(unsigned int *)byte);
 }
 
-void create_wall(t_core *core, t_vec2 pos, double wall_height, int color, double dist_wall, double angle)
+void create_wall_v(t_core *core, t_vec2 pos, double wall_height, double dist_wall, double angle)
 {
 	t_vec2 i;
 	int start;
@@ -149,40 +149,57 @@ void create_wall(t_core *core, t_vec2 pos, double wall_height, int color, double
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.ceiling_rgb);
 		else
 		{
-
-			if (color == 'h')
+			if (cos(core->ray.angle) < 0)
 			{
-				if ( sin(core->ray.angle) < 0)
-				{
-					text_x = (int)floor(core->map.player.pos.x + dist_wall * cos(angle)) % 32;
-					text_y = ((core->ray.n_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
-					text_x = text_x % core->ray.n_texture.bpp;
-					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.n_texture, text_x, text_y));
-				}
-				else
-				{
-					text_x = (int)floor(core->map.player.pos.x + dist_wall * cos(angle)) % 32;
-					text_y = ((core->ray.s_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
-					text_x = text_x % core->ray.s_texture.bpp;
-					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.s_texture, text_x, text_y));
-				}
+				text_x = (int)floor(core->map.player.pos.y - dist_wall * sin(angle)) % 32;
+				text_y = ((core->ray.w_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
+				text_x = text_x % core->ray.w_texture.bpp;
+				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.w_texture, text_x, text_y));
 			}
 			else
 			{
-				if ( cos(core->ray.angle) < 0)
-				{
-					text_x = (int)floor(core->map.player.pos.x + dist_wall * sin(angle)) % 64;
-					text_y = ((core->ray.w_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
-					text_x = text_x % core->ray.w_texture.bpp;
-					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.w_texture, text_x, text_y));
-				}
-				else
-				{
-					text_x = (int)floor(core->map.player.pos.x + dist_wall * sin(angle)) % 64;
-					text_y = ((core->ray.e_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
-					text_x = text_x % core->ray.e_texture.bpp;
-					plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.e_texture, text_x, text_y));
-				}
+				text_x = (int)floor(core->map.player.pos.y - dist_wall * sin(angle)) % 32;
+				text_y = ((core->ray.e_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
+				text_x = text_x % core->ray.e_texture.bpp;
+				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.e_texture, text_x, text_y));
+			}
+		}
+		i.y++;
+	}
+}
+
+void create_wall_h(t_core *core, t_vec2 pos, double wall_height, double dist_wall, double angle)
+{
+	t_vec2 i;
+	int start;
+	int end;
+	int text_x = 0;
+	int text_y = 0;
+
+	start = (WINDOW_HEIGHT - wall_height) / 2;
+	end = (WINDOW_HEIGHT + wall_height) / 2;
+	i.y = 0;
+	while (i.y < WINDOW_HEIGHT)
+	{
+		if (i.y < start)
+			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
+		else if (i.y > end)
+			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.ceiling_rgb);
+		else
+		{
+			if (sin(core->ray.angle) < 0)
+			{
+				text_x = (int)floor(core->map.player.pos.x + dist_wall * cos(angle)) % 32;
+				text_y = ((core->ray.n_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
+				text_x = text_x % core->ray.n_texture.bpp;
+				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.n_texture, text_x, text_y));
+			}
+			else
+			{
+				text_x = (int)floor(core->map.player.pos.x + dist_wall * cos(angle)) % 32;
+				text_y = ((core->ray.s_texture.bpp) * (i.y - (WINDOW_HEIGHT - wall_height) / 2)) / wall_height;
+				text_x = text_x % core->ray.s_texture.bpp;
+				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.s_texture, text_x, text_y));
 			}
 		}
 		i.y++;

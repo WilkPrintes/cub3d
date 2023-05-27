@@ -26,18 +26,12 @@ void raycasting(t_core *core, t_player player){
 		if (core->ray.distH < core->ray.distV)
 		{
 			core->ray.dist = wall_projection(core->ray.distH);
-			if ( sin(core->ray.angle) < 0)
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h' , core->ray.distH, core->ray.angle);
-			else
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'h', core->ray.distH, core->ray.angle);
+			create_wall_h(core, vec2(i, core->ray.dist), core->ray.dist, core->ray.distH, core->ray.angle);
 		}
 		else
 		{
 			core->ray.dist =  wall_projection(core->ray.distV);
-			if ( cos(core->ray.angle) < 0)
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
-			else
-				create_wall(core, vec2(i, core->ray.dist), core->ray.dist, 'v', core->ray.distV, core->ray.angle);
+			create_wall_v(core, vec2(i, core->ray.dist), core->ray.dist, core->ray.distV, core->ray.angle);
 		}
 		core->ray.angle -=  (PI/3)/WINDOW_WIDTH;
 		i++;
