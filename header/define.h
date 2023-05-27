@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/25 17:08:49 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:18:43 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ typedef struct s_ray
 	double	angle;
 	t_image n_texture;
 	t_image s_texture;
-	t_image w_texture;
 	t_image e_texture;
+	t_image w_texture;
 }	t_ray;
 
 typedef struct s_core
