@@ -117,8 +117,6 @@ double wall_projection(double dist_wall)
 	if (dist_wall == 0 || dist_wall == 999999)
 		return (0);
 	wall_height = 64 / dist_wall * WINDOW_HEIGHT;
-	if (wall_height > WINDOW_HEIGHT)
-		return (WINDOW_HEIGHT);
 	return (wall_height);
 }
 
