@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   wall.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 19:53:16 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:40:24 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/05/28 18:36:59 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/05/28 18:37:24 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef WALL_H
+# define WALL_H
 
-# include "macro.h"
-# include "define.h"
-# include <mlx.h>
+// wall.c
+void	create_wall_h(t_core *core, t_vec2 pos, t_ray ray);
+void	create_wall_v(t_core *core, t_vec2 pos, t_ray ray);
 
-int		rerender_image(t_mlx_data *data);
-void	plot_pixel(t_core *core, t_vec2 pos, int color);
-int		ft_mlx_pixel_get(t_image *img, int x, int y);
-t_vec2	vec2(int x, int y);
+// wall_utils.c
+int		is_wall(double ay, double ax, t_map map);
+void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray);
+void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray);
 
 #endif
