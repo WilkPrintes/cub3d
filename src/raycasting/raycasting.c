@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 23:25:11 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/27 18:27:48 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:18:42 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ void	raycasting(t_core *core, t_player player)
 		if (core->ray.distH < core->ray.distV)
 		{
 			core->ray.dist = wall_projection(core->ray.distH);
-			create_wall_h(core, vec2(i, core->ray.dist), core->ray.dist,
-				core->ray.distH, core->ray.angle);
+			create_wall_h(core, vec2(i, core->ray.dist), core->ray);
 		}
 		else
 		{
 			core->ray.dist = wall_projection(core->ray.distV);
-			create_wall_v(core, vec2(i, core->ray.dist), core->ray.dist,
-				core->ray.distV, core->ray.angle);
+			create_wall_v(core, vec2(i, core->ray.dist), core->ray);
 		}
 		core->ray.angle -= PI / 3 / WINDOW_WIDTH;
 		i++;

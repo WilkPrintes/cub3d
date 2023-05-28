@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:10:09 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/03/11 20:07:18 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:45:44 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@
 # include "mlx_data.h"
 # include "mlx_hook.h"
 # include "render.h"
-# include "cub3d.h"
 
 #endif

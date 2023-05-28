@@ -20,7 +20,41 @@
 #include "map.h"
 #include "map_setup.h"
 
-void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
+static void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core);
+static void	free_texture_images(t_core core);
+
+int	main(int argc, char **argv)
+{
+	t_core		core;
+
+	if (param_verifier(argc, argv[1]))
+		return (1);
+	if (!get_map(argv[1], &core.map, &core.config))
+		return (EXIT_FAILURE);
+	core.graphic = mount_mlx("cub3D");
+	load_textures(&core.config, &core.ray, &core);
+	raycasting(&core, core.map.player);
+	mlx_hook(core.graphic.win, X_DESTROY_NOTIFY_EVENT, X_DESTROY_NOTIFY_MASK,
+		&mouse_hook, &core.graphic);
+	mlx_hook(core.graphic.win, X_KEY_PRESS_EVENT, X_KEY_PRESS_MASK,
+		&keypress_hook, &core);
+	mlx_loop(core.graphic.mlx);
+	mlx_expose_hook(core.graphic.win, &rerender_image, &core.graphic);
+	free_texture_paths(&core.config.textures);
+	free_texture_images(core);
+	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
+	return (dismount_mlx(&core.graphic));
+}
+
+static void	free_texture_images(t_core core)
+{
+	mlx_destroy_image(core.graphic.mlx, core.ray.n_texture.mlx_img);
+	mlx_destroy_image(core.graphic.mlx, core.ray.s_texture.mlx_img);
+	mlx_destroy_image(core.graphic.mlx, core.ray.e_texture.mlx_img);
+	mlx_destroy_image(core.graphic.mlx, core.ray.w_texture.mlx_img);
+}
+
+static void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
 {
 	int	i;
 
@@ -45,35 +79,4 @@ void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
 	ray->e_texture.addr = mlx_get_data_addr(
 			ray->e_texture.mlx_img, &ray->e_texture.bpp,
 			&ray->e_texture.line_size, &ray->e_texture.endian);
-}
-
-void	free_texture_images(t_core core)
-{
-	mlx_destroy_image(core.graphic.mlx, core.ray.n_texture.mlx_img);
-	mlx_destroy_image(core.graphic.mlx, core.ray.s_texture.mlx_img);
-	mlx_destroy_image(core.graphic.mlx, core.ray.e_texture.mlx_img);
-	mlx_destroy_image(core.graphic.mlx, core.ray.w_texture.mlx_img);
-}
-
-int	main(int argc, char **argv)
-{
-	t_core		core;
-
-	if (param_verifier(argc, argv[1]))
-		return (1);
-	if (!get_map(argv[1], &core.map, &core.config))
-		return (EXIT_FAILURE);
-	core.graphic = mount_mlx("cub3D");
-	load_textures(&core.config, &core.ray, &core);
-	raycasting(&core, core.map.player);
-	mlx_hook(core.graphic.win, X_DESTROY_NOTIFY_EVENT, X_DESTROY_NOTIFY_MASK,
-		&mouse_hook, &core.graphic);
-	mlx_hook(core.graphic.win, X_KEY_PRESS_EVENT, X_KEY_PRESS_MASK,
-		&keypress_hook, &core);
-	mlx_loop(core.graphic.mlx);
-	mlx_expose_hook(core.graphic.win, &rerender_image, &core.graphic);
-	free_texture_paths(&core.config.textures);
-	free_texture_images(core);
-	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
-	return (dismount_mlx(&core.graphic));
 }
