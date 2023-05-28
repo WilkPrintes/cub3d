@@ -25,8 +25,6 @@
 # include "map.h"
 
 void	plot_pixel(t_core *core, t_vec2 pos, int color);
-void	print_sky_and_floor(t_core *core);
-void	create_rectangle(t_core *core, t_vec2 pos, t_vec2 size, int color);
 void	print_player(t_core *core, t_player player);
 void	show_dir(t_core *core, t_player player, int **map);
 t_vec2	dist_horizontal(t_player player, double angle, t_core *core);

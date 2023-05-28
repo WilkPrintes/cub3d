@@ -144,9 +144,9 @@ void create_wall_v(t_core *core, t_vec2 pos, double wall_height, double dist_wal
 	while (i.y < WINDOW_HEIGHT)
 	{
 		if (i.y < start)
-			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
-		else if (i.y > end)
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.ceiling_rgb);
+		else if (i.y > end)
+			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
 		else
 		{
 			if (cos(core->ray.angle) < 0)
@@ -182,9 +182,9 @@ void create_wall_h(t_core *core, t_vec2 pos, double wall_height, double dist_wal
 	while (i.y < WINDOW_HEIGHT)
 	{
 		if (i.y < start)
-			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
-		else if (i.y > end)
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.ceiling_rgb);
+		else if (i.y > end)
+			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
 		else
 		{
 			if (sin(core->ray.angle) < 0)
