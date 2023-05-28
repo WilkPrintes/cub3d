@@ -16,8 +16,8 @@ double	wall_projection(double dist_wall)
 {
 	double	wall_height;
 
-	if (dist_wall == 0 || dist_wall == 999999)
-		return (0);
+	if (dist_wall == 0)
+		return (WINDOW_HEIGHT);
 	wall_height = 64 / dist_wall * WINDOW_HEIGHT;
 	return (wall_height);
 }

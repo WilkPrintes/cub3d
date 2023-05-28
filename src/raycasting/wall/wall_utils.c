@@ -30,7 +30,7 @@ void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	if (sin(core->ray.angle) < 0)
 	{
 		text_x = (int)(
-				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 32;
+				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 64;
 		text_y = ((core->ray.s_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.s_texture.bpp;
@@ -40,7 +40,7 @@ void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	else
 	{
 		text_x = (int)(
-				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 32;
+				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 64;
 		text_y = ((core->ray.n_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.n_texture.bpp;
@@ -57,7 +57,7 @@ void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	if (cos(core->ray.angle) < 0)
 	{
 		text_x = (int)(
-				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 32;
+				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 64;
 		text_y = ((core->ray.w_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.w_texture.bpp;
@@ -67,7 +67,7 @@ void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	else
 	{
 		text_x = (int)(
-				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 32;
+				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 64;
 		text_y = ((core->ray.e_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.e_texture.bpp;
