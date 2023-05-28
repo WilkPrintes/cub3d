@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:00:59 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:27:49 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:33:59 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	create_wall_v(t_core *core, t_vec2 pos, t_ray ray)
 	t_vec2	i;
 	int		start;
 	int		end;
-	int		text_x = 0;
-	int		text_y = 0;
 
 	start = (WINDOW_HEIGHT - ray.dist) / 2;
 	end = (WINDOW_HEIGHT + ray.dist) / 2;
@@ -61,22 +59,7 @@ void	create_wall_v(t_core *core, t_vec2 pos, t_ray ray)
 		else if (i.y > end)
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
 		else
-		{
-			if (cos(core->ray.angle) < 0)
-			{
-				text_x = (int)floor(core->map.player.pos.y - ray.distV * sin(ray.angle)) % 32;
-				text_y = ((core->ray.w_texture.bpp) * (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
-				text_x = text_x % core->ray.w_texture.bpp;
-				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.w_texture, text_x, text_y));
-			}
-			else
-			{
-				text_x = (int)floor(core->map.player.pos.y - ray.distV * sin(ray.angle)) % 32;
-				text_y = ((core->ray.e_texture.bpp) * (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
-				text_x = text_x % core->ray.e_texture.bpp;
-				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.e_texture, text_x, text_y));
-			}
-		}
+			texturize_wall_v(core, i, pos, ray);
 		i.y++;
 	}
 }

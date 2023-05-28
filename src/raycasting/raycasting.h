@@ -38,5 +38,6 @@ void	create_wall_v(t_core *core, t_vec2 pos, t_ray ray);
 // wall_utils.c
 int		is_wall(double ay, double ax, t_map map);
 void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray);
+void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray);
 
 #endif
