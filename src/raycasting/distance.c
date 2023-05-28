@@ -12,12 +12,12 @@
 
 #include "raycasting.h"
 
-t_vec2 dist_horizontal(t_player player, double angle, t_core *core)
+t_vec2	dist_horizontal(t_player player, double angle, t_core *core)
 {
-	double ay;
-	double ax;
-	double ya;
-	double xa;
+	double	ay;
+	double	ax;
+	double	ya;
+	double	xa;
 
 	if (sin(angle) == 0)
 		return (vec2(999999, 999999));
@@ -49,12 +49,12 @@ t_vec2 dist_horizontal(t_player player, double angle, t_core *core)
 	}
 }
 
-t_vec2 dist_vert(t_player player, double angle, t_core *core)
+t_vec2	dist_vert(t_player player, double angle, t_core *core)
 {
-	double bx;
-	double by;
-	double xa;
-	double ya;
+	double	bx;
+	double	by;
+	double	xa;
+	double	ya;
 
 	if (cos(angle) == 0)
 		return (vec2(999999, 999999));
