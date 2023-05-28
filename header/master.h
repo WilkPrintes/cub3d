@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 15:10:09 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 17:45:44 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:23:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include "verifier.h"
 # include "mlx_data.h"
 # include "mlx_hook.h"
+# include "map_setup.h"
+# include "map.h"
 # include "render.h"
+# include "wall.h"
+# include "raycasting.h"
 
 #endif

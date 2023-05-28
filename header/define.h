@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:40:01 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:48:12 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:13:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ typedef struct s_ray
 {
 	t_vec2	dist_h;
 	t_vec2	dist_v;
-	double	distH;
-	double	distV;
+	double	num_dist_h;
+	double	num_dist_v;
 	double	dist;
 	double	angle;
 	t_image	n_texture;

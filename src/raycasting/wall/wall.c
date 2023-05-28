@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:00:59 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:33:59 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:15:31 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "wall.h"
 
 double	wall_projection(double dist_wall)
 {

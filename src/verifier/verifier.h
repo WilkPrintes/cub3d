@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:05:44 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/04 14:49:51 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:24:07 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include "define.h"
 # include "libft.h"
 # include "error.h"

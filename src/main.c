@@ -10,15 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
-#include "define.h"
-#include "macro.h"
-#include "verifier.h"
-#include "mlx_data.h"
-#include "mlx_hook.h"
-#include "render.h"
-#include "map.h"
-#include "map_setup.h"
+#include "master.h"
 
 static void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core);
 static void	free_texture_images(t_core core);

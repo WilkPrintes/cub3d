@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:01:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:34:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:15:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycasting.h"
+#include "wall.h"
 
 int	is_wall(double ay, double ax, t_map map)
 {
@@ -30,7 +30,7 @@ void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	if (sin(core->ray.angle) < 0)
 	{
 		text_x = (int)(
-				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 64;
+				core->map.player.pos.x + ray.num_dist_h * cos(ray.angle)) % 64;
 		text_y = ((core->ray.s_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.s_texture.bpp;
@@ -40,7 +40,7 @@ void	texturize_wall_h(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	else
 	{
 		text_x = (int)(
-				core->map.player.pos.x + ray.distH * cos(ray.angle)) % 64;
+				core->map.player.pos.x + ray.num_dist_h * cos(ray.angle)) % 64;
 		text_y = ((core->ray.n_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.n_texture.bpp;
@@ -57,7 +57,7 @@ void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	if (cos(core->ray.angle) < 0)
 	{
 		text_x = (int)(
-				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 64;
+				core->map.player.pos.y - ray.num_dist_v * sin(ray.angle)) % 64;
 		text_y = ((core->ray.w_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.w_texture.bpp;
@@ -67,7 +67,7 @@ void	texturize_wall_v(t_core *core, t_vec2 i, t_vec2 pos, t_ray ray)
 	else
 	{
 		text_x = (int)(
-				core->map.player.pos.y - ray.distV * sin(ray.angle)) % 64;
+				core->map.player.pos.y - ray.num_dist_v * sin(ray.angle)) % 64;
 		text_y = ((core->ray.e_texture.bpp)
 				* (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
 		text_x = text_x % core->ray.e_texture.bpp;

@@ -6,7 +6,7 @@
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
-#    Updated: 2023/05/28 16:41:46 by bmugnol-         ###   ########.fr        #
+#    Updated: 2023/05/28 20:48:33 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,40 @@ NAME		:=	cub3D
 H_MASTER	:=	master.h
 # Headers
 HEADER_DIR	:=	header
-HEADER		:=	cub3d.h
+HEADER		:=	define.h	macro.h
+HEADER_DIR	+=	src/error
+HEADER		+=	error.h
+HEADER_DIR	+=	src/map
+HEADER		+=	map_setup.h	map.h
+HEADER_DIR	+=	src/mlx
+HEADER		+=	mlx_data.h	mlx_hook.h
+HEADER_DIR	+=	src/raycasting	src/raycasting/render	src/raycasting/wall
+HEADER		+=	render.h	wall.h		raycasting.h
+HEADER_DIR	+=	src/verifier
+HEADER		+=	verifier.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src
-SRC			:=	cub3d.c
+SRC			:=	main.c
+SRC_DIR		+=	src/error
+SRC			+=	error.c
+SRC_DIR		+=	src/map
+SRC			+=	map.c			map_utils.c		map_verifier.c
+SRC_DIR		+=	src/map/config
+SRC			+=	map_color.c		map_config.c	map_texture.c
+SRC_DIR		+=	src/map/matrix
+SRC			+=	map_matrix.c	map_read.c
+SRC_DIR		+=	src/mlx
+SRC			+=	mlx_data.c		mlx_hook.c
+SRC_DIR		+=	src/raycasting
+SRC			+=	distance.c		raycasting.c
+SRC_DIR		+=	src/raycasting/render
+SRC			+=	render.c
+SRC_DIR		+=	src/raycasting/wall
+SRC			+=	wall_utils.c	wall.c
+SRC_DIR		+=	src/verifier
+SRC			+=	verifier.c
 
 # Object
 OBJ_DIR		:=	obj
