@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:01:22 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/27 00:04:58 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:30:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	get_player(int x, int y, char c, t_player *player)
 		player->pos.x = x * 64 + 32;
 		player->pos.y = y * 64 + 32;
 		if (c == 'N')
-			player->dir =  PI / 2;
+			player->dir = PI / 2;
 		if (c == 'S')
 			player->dir = 3 * PI / 2;
 		if (c == 'E')

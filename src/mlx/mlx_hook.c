@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:39:02 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 01:35:51 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:24:04 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_press_hook(int keycode, t_mlx_data *data)
 	return (0);
 }
 
-int	get_key(int key, t_core *core)
+int	keypress_hook(int key, t_core *core)
 {
 	if (key == KEY_ESC)
 	{

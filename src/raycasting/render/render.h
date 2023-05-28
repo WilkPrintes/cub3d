@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_hook.h                                         :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 17:59:26 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 16:35:14 by bmugnol-         ###   ########.fr       */
+/*   Created: 2023/03/11 19:53:16 by bmugnol-          #+#    #+#             */
+/*   Updated: 2023/05/28 16:58:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_HOOK_H
-# define MLX_HOOK_H
+#ifndef RENDER_H
+# define RENDER_H
 
 # include <stdlib.h>
 # include "macro.h"
 # include "define.h"
-# include "raycasting.h"
 
-int	mouse_hook(t_mlx_data *data);
-int	keypress_hook(int key, t_core *core);
+int		rerender_image(t_mlx_data *data);
+
+// render_utils.c
+void	plot_pixel(t_core *core, t_vec2 pos, int color);
+int		ft_mlx_pixel_get(t_image *img, int x, int y);
+t_vec2	vec2(int x, int y);
 
 #endif

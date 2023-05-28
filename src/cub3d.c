@@ -18,7 +18,7 @@ void square(t_data data, int x, int y, int color);
 void init_map(int map[10][10], t_data *data);
 void free_map(int **map);
 
-int	get_key(int key, t_data *data){
+int	keypress_hook(int key, t_data *data){
 	printf("key: %d\n", key);
 	if (key == 65307)
 	{
@@ -72,7 +72,7 @@ int	main(void)
 	data.ptr = mlx_init();
 	data.win = mlx_new_window(data.ptr, 64*10, 64*10, "cub3d");
 	create_square(&data, 0, 0);
-	mlx_key_hook(data.win, &get_key, &data);
+	mlx_key_hook(data.win, &keypress_hook, &data);
 	mlx_loop(data.ptr);
 }
 

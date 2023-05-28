@@ -20,19 +20,31 @@
 #include "map.h"
 #include "map_setup.h"
 
-void load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
+void	load_textures(t_graphic_config *graphic, t_ray *ray, t_core *core)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	ray->n_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.north_wall, &i, &i);
-	ray->n_texture.addr = mlx_get_data_addr(ray->n_texture.mlx_img, &ray->n_texture.bpp, &ray->n_texture.line_size, &ray->n_texture.endian);
-	ray->s_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.south_wall, &i, &i);
-	ray->s_texture.addr = mlx_get_data_addr(ray->s_texture.mlx_img, &ray->s_texture.bpp, &ray->s_texture.line_size, &ray->s_texture.endian);
-	ray->w_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.west_wall, &i, &i);
-	ray->w_texture.addr = mlx_get_data_addr(ray->w_texture.mlx_img, &ray->w_texture.bpp, &ray->w_texture.line_size, &ray->w_texture.endian);
-	ray->e_texture.mlx_img = mlx_xpm_file_to_image(core->graphic.mlx, graphic->textures.east_wall, &i, &i);
-	ray->e_texture.addr = mlx_get_data_addr(ray->e_texture.mlx_img, &ray->e_texture.bpp, &ray->e_texture.line_size, &ray->e_texture.endian);
+	ray->n_texture.mlx_img = mlx_xpm_file_to_image(
+			core->graphic.mlx, graphic->textures.north_wall, &i, &i);
+	ray->n_texture.addr = mlx_get_data_addr(
+			ray->n_texture.mlx_img, &ray->n_texture.bpp,
+			&ray->n_texture.line_size, &ray->n_texture.endian);
+	ray->s_texture.mlx_img = mlx_xpm_file_to_image(
+			core->graphic.mlx, graphic->textures.south_wall, &i, &i);
+	ray->s_texture.addr = mlx_get_data_addr(
+			ray->s_texture.mlx_img, &ray->s_texture.bpp,
+			&ray->s_texture.line_size, &ray->s_texture.endian);
+	ray->w_texture.mlx_img = mlx_xpm_file_to_image(
+			core->graphic.mlx, graphic->textures.west_wall, &i, &i);
+	ray->w_texture.addr = mlx_get_data_addr(
+			ray->w_texture.mlx_img, &ray->w_texture.bpp,
+			&ray->w_texture.line_size, &ray->w_texture.endian);
+	ray->e_texture.mlx_img = mlx_xpm_file_to_image(
+			core->graphic.mlx, graphic->textures.east_wall, &i, &i);
+	ray->e_texture.addr = mlx_get_data_addr(
+			ray->e_texture.mlx_img, &ray->e_texture.bpp,
+			&ray->e_texture.line_size, &ray->e_texture.endian);
 }
 
 void	free_texture_images(t_core core)
@@ -43,9 +55,10 @@ void	free_texture_images(t_core core)
 	mlx_destroy_image(core.graphic.mlx, core.ray.w_texture.mlx_img);
 }
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_core		core;
+
 	if (param_verifier(argc, argv[1]))
 		return (1);
 	if (!get_map(argv[1], &core.map, &core.config))
@@ -55,10 +68,12 @@ int main (int argc, char **argv)
 	raycasting(&core, core.map.player);
 	mlx_hook(core.graphic.win, X_DESTROY_NOTIFY_EVENT, X_DESTROY_NOTIFY_MASK,
 		&mouse_hook, &core.graphic);
-	mlx_hook(core.graphic.win, 2, 1L<<0,  &get_key, &core);
+	mlx_hook(core.graphic.win, X_KEY_PRESS_EVENT, X_KEY_PRESS_MASK,
+		&keypress_hook, &core);
 	mlx_loop(core.graphic.mlx);
+	mlx_expose_hook(core.graphic.win, &rerender_image, &core.graphic);
 	free_texture_paths(&core.config.textures);
-	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
 	free_texture_images(core);
+	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
 	return (dismount_mlx(&core.graphic));
 }

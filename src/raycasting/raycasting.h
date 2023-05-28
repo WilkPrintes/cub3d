@@ -24,17 +24,19 @@
 # include "render.h"
 # include "map.h"
 
-void	plot_pixel(t_core *core, t_vec2 pos, int color);
 void	print_player(t_core *core, t_player player);
 void	show_dir(t_core *core, t_player player, int **map);
 t_vec2	dist_horizontal(t_player player, double angle, t_core *core);
 t_vec2	dist_vert(t_player player, double angle, t_core *core);
-t_vec2	vec2(int x, int y);
-int		is_wall(double ay, double ax, t_map map);
 double	wall_projection(double dist_wall);
 void	raycasting(t_core *core, t_player player);
 
+
+// wall.c
 void	create_wall_v(t_core *core, t_vec2 pos, double wall_height, double dist_wall, double angle);
 void    create_wall_h(t_core *core, t_vec2 pos, double wall_height, double dist_wall, double angle);
+
+// wall_utils.c
+int		is_wall(double ay, double ax, t_map map);
 
 #endif
