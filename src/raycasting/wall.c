@@ -6,15 +6,15 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:00:59 by bmugnol-          #+#    #+#             */
-/*   Updated: 2023/05/28 18:17:36 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:27:49 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
 
-double wall_projection(double dist_wall)
+double	wall_projection(double dist_wall)
 {
-	double wall_height;
+	double	wall_height;
 
 	if (dist_wall == 0 || dist_wall == 999999)
 		return (0);
@@ -22,14 +22,11 @@ double wall_projection(double dist_wall)
 	return (wall_height);
 }
 
-// void create_wall_h(t_core *core, t_vec2 pos, double wall_height, double distV, double angle)
-void    create_wall_h(t_core *core, t_vec2 pos, t_ray ray)
+void	create_wall_h(t_core *core, t_vec2 pos, t_ray ray)
 {
-	t_vec2 i;
-	int start;
-	int end;
-	int text_x = 0;
-	int text_y = 0;
+	t_vec2	i;
+	int		start;
+	int		end;
 
 	start = (WINDOW_HEIGHT - ray.dist) / 2;
 	end = (WINDOW_HEIGHT + ray.dist) / 2;
@@ -41,33 +38,18 @@ void    create_wall_h(t_core *core, t_vec2 pos, t_ray ray)
 		else if (i.y > end)
 			plot_pixel(core, (t_vec2){pos.x, i.y}, core->config.floor_rgb);
 		else
-		{
-			if (sin(core->ray.angle) < 0)
-			{
-				text_x = (int)(core->map.player.pos.x + ray.distH * cos(ray.angle)) % 32;
-				text_y = ((core->ray.s_texture.bpp) * (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
-				text_x = text_x % core->ray.s_texture.bpp;
-				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.s_texture, text_x, text_y));
-			}
-			else
-			{
-				text_x = (int)(core->map.player.pos.x + ray.distH * cos(ray.angle)) % 32;
-				text_y = ((core->ray.n_texture.bpp) * (i.y - (WINDOW_HEIGHT - ray.dist) / 2)) / ray.dist;
-				text_x = text_x % core->ray.n_texture.bpp;
-				plot_pixel(core, (t_vec2){pos.x, i.y}, ft_mlx_pixel_get(&core->ray.n_texture, text_x, text_y));
-			}
-		}
+			texturize_wall_h(core, i, pos, ray);
 		i.y++;
 	}
 }
 
 void	create_wall_v(t_core *core, t_vec2 pos, t_ray ray)
 {
-	t_vec2 i;
-	int start;
-	int end;
-	int text_x = 0;
-	int text_y = 0;
+	t_vec2	i;
+	int		start;
+	int		end;
+	int		text_x = 0;
+	int		text_y = 0;
 
 	start = (WINDOW_HEIGHT - ray.dist) / 2;
 	end = (WINDOW_HEIGHT + ray.dist) / 2;
