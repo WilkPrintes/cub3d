@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 		&mouse_hook, &core.graphic);
 	mlx_hook(core.graphic.win, X_KEY_PRESS_EVENT, X_KEY_PRESS_MASK,
 		&keypress_hook, &core);
-	mlx_loop(core.graphic.mlx);
 	mlx_expose_hook(core.graphic.win, &rerender_image, &core.graphic);
+	mlx_loop(core.graphic.mlx);
 	free_texture_paths(&core.config.textures);
 	free_texture_images(core);
 	ft_free_matrix((void *)&core.map.matrix, core.map.lines);
